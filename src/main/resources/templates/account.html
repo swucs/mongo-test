@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="application/javascript">
+        let k
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            var latitude = pos.coords.latitude;
+            var longitude = pos.coords.longitude;
+            alert("현재 위치는 : " + latitude + ", "+ longitude);
+            k = {latitude:latitude+"", longtitude:longitude+""};
+
+            alert(JSON.stringify(k));
+
+            $.ajax({
+                url: "/account",
+                data: JSON.stringify(k),
+                type : 'POST',
+                dataType: 'json',
+                contentType : "application/json",
+                success: function(e) {
+                    alert("성공~~~")
+                },
+                fail: function(e){
+                    alert("실패했습니다 오류코드는:"+e);
+                }
+            });
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
